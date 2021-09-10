@@ -1,11 +1,24 @@
 import React from 'react'
 import style from './Layout.module.css'
 
-const Layout = ({ title, desc, imgBg, colorBg}) => {
-    const styleRoot = imgBg ? {background: `url(${imgBg})`} : {background: `${colorBg}`}
+const Layout = ({ id, title, imgBg, colorBg, children}) => {
+  const styleRoot = {};
+    
+    if (imgBg) {
+        styleRoot.backgroundImage = `url(${imgBg})`;
+    }
+
+    if (colorBg) {
+        styleRoot.backgroundColor = colorBg;
+    }
+
     return (
         <div>
-            <section className={style.root} style={styleRoot}>
+            <section
+                className={style.root}
+                style={styleRoot}
+                id={id}
+            >
                 <div className={style.wrapper}>
                     <article>
                         <div className={style.title}>
@@ -13,7 +26,7 @@ const Layout = ({ title, desc, imgBg, colorBg}) => {
                             <span className={style.separator}></span>
                         </div>
                         <div className={`${style.desc} ${style.full}`}>
-                            <p>{desc}</p>
+                            {children}
                         </div>
                     </article>
                 </div>
